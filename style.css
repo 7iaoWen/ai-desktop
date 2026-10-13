@@ -1,0 +1,473 @@
+/* ===== 全局重置 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: transparent !important;
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* ===== 主界面容器 ===== */
+#chat-container {
+    width: 420px;
+    height: 320px;
+    background: rgba(20, 20, 30, 0.45);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: none;
+    padding: 18px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    color: rgba(255, 255, 255, 0.92);
+    user-select: none;
+}
+
+/* ===== 消息区域 ===== */
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.10) transparent;
+}
+
+#messages::-webkit-scrollbar {
+    width: 3px;
+}
+#messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+.message {
+    margin-bottom: 6px;
+    padding: 8px 14px;
+    border-radius: 14px;
+    max-width: 88%;
+    word-wrap: break-word;
+    animation: fadeIn 0.25s ease;
+}
+
+.user-msg {
+    background: rgba(255, 255, 255, 0.12);
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+
+.ai-msg {
+    background: rgba(255, 255, 255, 0.06);
+    border-bottom-left-radius: 4px;
+    border-left: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== 输入区域 ===== */
+#input-area {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 30px;
+    padding: 4px 4px 4px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+#user-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    padding: 6px 0;
+}
+
+#user-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+#send-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#send-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+/* ===== 头部 ===== */
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+#character-select {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+#character-select:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+#character-select option {
+    background: #1a1a2e;
+    color: #eee;
+}
+
+#status {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
+}
+
+#header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ===== 观众模式 ===== */
+#viewer-status {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+#viewer-status.active {
+    color: #7bf5a0;
+    background: rgba(123, 245, 160, 0.1);
+}
+
+#viewer-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+#viewer-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#viewer-toggle.active {
+    background: rgba(123, 245, 160, 0.15);
+    color: #7bf5a0;
+}
+
+/* ===== 设置按钮 ===== */
+#settings-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+#settings-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.8);
+}
+/* ===== 退出按钮 ===== */
+#quit-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+#quit-btn:hover {
+    background: rgba(255, 100, 100, 0.15);
+    color: rgba(255, 150, 150, 0.7);
+}
+
+/* ============================================================
+   设置面板样式（完整版）
+   ============================================================ */
+
+/* ===== 设置面板遮罩 ===== */
+#settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    border: none !important;
+    outline: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 20px !important;  /* 匹配主窗口圆角 */
+    overflow: hidden;
+}
+
+/* ===== 设置面板主体 ===== */
+#settings-panel {
+    width: 90%;
+    max-width: 480px;
+    max-height: 85%;
+    background: rgba(30, 30, 50, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    padding: 24px 28px 20px;
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0;
+}
+
+/* ===== 设置头部 ===== */
+#settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+#settings-header h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+#close-settings {
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#close-settings:hover {
+    background: rgba(255, 100, 100, 0.2);
+    color: rgba(255, 150, 150, 0.8);
+}
+
+/* ===== 设置内容（滚动区域） ===== */
+#settings-body {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 6px;
+    margin-bottom: 12px;
+    min-height: 0;
+}
+
+#settings-body::-webkit-scrollbar {
+    width: 4px;
+}
+#settings-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+#settings-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+#settings-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== 设置项分组 ===== */
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.setting-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.setting-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.setting-group textarea,
+.setting-group input,
+.setting-group select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s;
+    width: 100%;
+}
+
+.setting-group textarea:focus,
+.setting-group input:focus,
+.setting-group select:focus {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.setting-group textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
+.setting-group select {
+    cursor: pointer;
+    appearance: auto;
+}
+
+.setting-group select option {
+    background: #1a1a2e;
+    color: #eee;
+}
+
+.setting-row {
+    display: flex;
+    gap: 10px;
+}
+
+.setting-row input {
+    flex: 1;
+    min-width: 0;
+}
+
+.setting-hint {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    margin-top: 2px;
+}
+
+/* ===== 操作按钮（固定在底部） ===== */
+#settings-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+#settings-actions button {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+#save-settings {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#save-settings:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#reset-settings {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+#reset-settings:hover {
+    background: rgba(255, 100, 100, 0.1);
+    color: rgba(255, 150, 150, 0.6);
+}
+
+/* ===== 拖拽抓手 ===== */
+#drag-handle {
+    display: inline-block;
+    padding: 2px 6px;
+    cursor: grab;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 16px;
+    line-height: 1;
+    user-select: none;
+    transition: 0.2s;
+    -webkit-app-region: drag;  /* 关键：使这个区域可以拖拽窗口 */
+}
+
+#drag-handle:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#drag-handle:active {
+    cursor: grabbing;
+}

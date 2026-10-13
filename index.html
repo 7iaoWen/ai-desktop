@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI桌面助手</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="chat-container">
+        <!-- 顶部 -->
+        <div id="header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span id="drag-handle" title="拖拽移动">⠿</span>
+                <select id="character-select">
+                    <option value="default">🤖 默认助手</option>
+                    <option value="cat">🐱 猫娘</option>
+                    <option value="teacher">📚 教师</option>
+                    <option value="poet">📝 诗人</option>
+                    <option value="hacker">💻 黑客</option>
+                </select>
+            </div>
+<div id="header-right">
+    <button id="settings-btn" title="设置">⚙️</button>
+    <span id="viewer-status" title="观众模式">👀 哼~</span>
+    <button id="viewer-toggle" title="切换观众模式">🎮</button>
+    <span id="status">🟢 在线</span>
+    <button id="quit-btn" title="退出">⏻</button>
+</div>
+        </div>
+
+        <!-- 消息区域 -->
+        <div id="messages">
+            //<div class="message ai-msg">👋 你好！开启「观众模式」我会看你打游戏并评论</div>
+        </div>
+
+        <!-- 输入区域 -->
+        <div id="input-area">
+            <input id="user-input" placeholder="输入消息..." />
+            <button id="send-btn">➤</button>
+        </div>
+    </div>
+
+    <!-- 设置面板 -->
+    <div id="settings-overlay">
+        <div id="settings-panel">
+            <div id="settings-header">
+                <h2>⚙️ 设置</h2>
+                <button id="close-settings">✕</button>
+            </div>
+            <div id="settings-body">
+                <div class="setting-group">
+                    <label class="setting-label">🎭 角色设定</label>
+                    <textarea id="system-prompt" rows="3" placeholder="描述角色性格..."></textarea>
+                    <div class="setting-hint">AI 会按照这个设定来回答你</div>
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">👤 用户设定</label>
+                    <div class="setting-row">
+                        <input id="user-name" placeholder="你的名字" />
+                        <input id="user-preference" placeholder="你的偏好" />
+                    </div>
+                    <div class="setting-hint">例如：喜欢简洁的回答</div>
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">🎮 观众模式设置</label>
+                    <div class="setting-row">
+                        <input id="viewer-interval" placeholder="评论间隔(秒)" value="15" />
+                        <input id="viewer-game" placeholder="游戏名称(可选)" value="游戏" />
+                    </div>
+                    <div class="setting-hint">每隔多少秒评论一次，填 0 关闭自动评论</div>
+                    <div class="setting-group" style="margin-top: 8px;">
+                        <label class="setting-label">🎮 碎碎念风格</label>
+                        <select id="viewer-style">
+                            <option value="random">🎲 随机</option>
+                            <option value="吐槽向">🔥 毒舌吐槽</option>
+                            <option value="鼓励向">💪 加油打气</option>
+                            <option value="迷惑向">🤔 强行分析</option>
+                            <option value="玩梗向">😂 玩梗弹幕</option>
+                            <option value="观众向">👀 弹幕风格</option>
+                        </select>
+                        <div class="setting-hint">选择 AI 评论的风格</div>
+                    </div>
+                </div>
+                <div id="settings-actions">
+                    <button id="save-settings">💾 保存设定</button>
+                    <button id="reset-settings">↩️ 恢复默认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
